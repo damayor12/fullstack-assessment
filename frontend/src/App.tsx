@@ -95,7 +95,7 @@ const App: React.FC<TopicDetailProps> = (): JSX.Element => {
       </div>
 
       <div className="flex justify-center">
-        <ReactPaginate
+        {data.length > 0 && <ReactPaginate
           pageCount={pages}
           previousLabel="previous"
           nextLabel="next"
@@ -103,7 +103,7 @@ const App: React.FC<TopicDetailProps> = (): JSX.Element => {
           onPageChange={handleCurrentPage}
           // disabledClassName="pagination-disabled-button"
           activeClassName={'active'}
-        />
+        />}
       </div>
     </div>
   );

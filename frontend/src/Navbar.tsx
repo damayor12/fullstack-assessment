@@ -21,23 +21,7 @@ const Navbar: React.FC<NavbarProps> = ({ value, setValue }): JSX.Element => (
             type="search"
             value={value}
             onChange={(e) => setValue?.(e.target.value)}
-            className="
-        form-control
-        block
-        w-200
-        px-3
-        py-1.5
-        text-base
-        font-normal
-        text-gray-700
-        bg-white bg-clip-padding
-        border border-solid border-gray-300
-        rounded
-        transition
-        ease-in-out
-        mx-5
-        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-      "
+            className="form-control blockw-200 px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out mx-5 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             id="exampleSearch"
             placeholder="Name or LastName"
           />

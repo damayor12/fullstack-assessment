@@ -104,6 +104,11 @@ const Table = ({ data }: { data: Ipolicy[] }) => (
               </tr> */}
             </tbody>
           </table>
+          {data.length === 0 && (
+            <div className="flex justify-center w-full">
+              <p>No policies found, please try again</p>{' '}
+            </div>
+          )}
         </div>
       </div>
     </div>
