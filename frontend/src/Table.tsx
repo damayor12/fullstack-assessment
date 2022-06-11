@@ -35,7 +35,7 @@ const Table = ({ data }: { data: Ipolicy[] }) => (
                 <>
                   <tr className="border-b" key={index}>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      {index + 1}
+                      {dataItem.uuid}
                     </td>
                     <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                       {`${dataItem.customer.firstName} ${dataItem.customer.lastName}`}

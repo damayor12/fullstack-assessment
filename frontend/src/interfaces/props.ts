@@ -1,5 +1,6 @@
 export interface Ipolicy {
   id: string;
+  uuid: number | string
   provider: string;
   insuranceType: string;
   status: string;

@@ -31,7 +31,7 @@ const App: React.FC<TopicDetailProps> = (): JSX.Element => {
   const [data, setData] = useState<Ipolicy[] | []>([]);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [pages, setTotalPages] = useState<number>(0);
-  const [active, setActive] = useState(null);
+  const [value, setValue] = useState('');
   const [filters, setFilters] = useState<FilterProps>({
     active: false,
     pending: false,
@@ -41,7 +41,7 @@ const App: React.FC<TopicDetailProps> = (): JSX.Element => {
   const [currentPage, setCurrentPage] = useState<number>(0);
 
   useEffect((): void => {
-    fetchData(currentPage, filters).then(({ policies, totalPages }) => {
+    fetchData(currentPage, filters, value).then(({ policies, totalPages }) => {
       setData(policies);
       setTotalPages(totalPages);
     });
@@ -53,7 +53,7 @@ const App: React.FC<TopicDetailProps> = (): JSX.Element => {
     // };
 
     // fetchData();
-  }, [currentPage, filters]);
+  }, [currentPage, filters,value]);
 
   // console.log('final data', data);
 
@@ -84,7 +84,7 @@ const App: React.FC<TopicDetailProps> = (): JSX.Element => {
 
   return (
     <div>
-      <Navbar />
+      <Navbar value={value} setValue={setValue}/>
       <div className="w-full p-8">
         <Header
           filters={filters}

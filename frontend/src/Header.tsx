@@ -2,16 +2,15 @@ import axios from 'axios';
 import Badge from './Badge';
 
 interface FilterProps {
-  active: boolean 
-  pending: boolean 
-  joined: boolean 
+  active: boolean;
+  pending: boolean;
+  joined: boolean;
 }
-
 
 interface HeaderProps {
   filters?: FilterProps;
   setFilters?: React.Dispatch<React.SetStateAction<FilterProps>>;
-  handleCurrentFilter?: (a: string)=> void
+  handleCurrentFilter?: (a: string) => void;
 }
 
 const Header: React.FC<HeaderProps> = ({
@@ -19,7 +18,7 @@ const Header: React.FC<HeaderProps> = ({
   setFilters,
   handleCurrentFilter,
 }): JSX.Element => {
-
+  // Object.values();
   // console.log('filters', filters, 'filters')
   return (
     <>
@@ -28,7 +27,7 @@ const Header: React.FC<HeaderProps> = ({
         <h3 className="inline-block rounded-full	py-1 px-4 font-semibold text-sm ">Filter by:</h3>
         <div
           className={`inline-block rounded-full	py-1 px-4 mx-3 font-semibold text-sm tc-red-100 hover:bg-red-300 cursor-pointer ${
-            filters?.active ? 'bg-red-300' : 'bg-red-100'
+            filters?.active ? 'bg-red-300' : 'bg-gray-100'
           }`}
           onClick={() => handleCurrentFilter?.('active')}
         >
@@ -36,7 +35,7 @@ const Header: React.FC<HeaderProps> = ({
         </div>
         <div
           className={`inline-block rounded-full	py-1 px-4 mx-3 font-semibold text-sm tc-red-100 hover:bg-red-300 cursor-pointer ${
-            filters?.pending ? 'bg-red-300' : 'bg-red-100'
+            filters?.pending ? 'bg-red-300' : 'bg-gray-100'
           }`}
           onClick={() => handleCurrentFilter?.('pending')}
         >
@@ -44,19 +43,21 @@ const Header: React.FC<HeaderProps> = ({
         </div>
         <div
           className={`inline-block rounded-full	py-1 px-4 mx-3 font-semibold text-sm tc-red-100 hover:bg-red-300 cursor-pointer ${
-            filters?.joined ? 'bg-red-300' : 'bg-red-100'
+            filters?.joined ? 'bg-red-300' : 'bg-gray-100'
           }`}
           onClick={() => handleCurrentFilter?.('joined')}
         >
           Joined 2012
         </div>
 
-        <div
-          className="inline-block rounded-full	py-1 px-4 font-semibold text-sm cursor-pointer"
-          onClick={() => handleCurrentFilter?.('cancel')}
-        >
-          Clear Filters
-        </div>
+        {Object.values(filters as any).some((item) => item) && (
+          <div
+            className="inline-block rounded-full	py-1 px-4 font-semibold text-sm cursor-pointer"
+            onClick={() => handleCurrentFilter?.('cancel')}
+          >
+            Clear Filters
+          </div>
+        )}
       </div>
     </>
   );

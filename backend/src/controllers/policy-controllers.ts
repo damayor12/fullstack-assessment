@@ -82,7 +82,7 @@ const fetchPolicies = async (req: Request, res: Response) => {
       };
 
       console.log('OR', or)
-  const policies = await prisma.policy.findMany({
+  let policies = await prisma.policy.findMany({
     skip: page * PAGE_SIZE,
     take: PAGE_SIZE,
     where: {
@@ -112,7 +112,12 @@ const fetchPolicies = async (req: Request, res: Response) => {
     },
   });
 
-  res.json({ policies, totalPages: Math.ceil(totalDocs / PAGE_SIZE) });
+  policies = policies.map((policyItem, index) => {
+    return {...policyItem, uuid: (PAGE_SIZE* page) + index + 1}
+  } )
+
+  
+  res.status(200).json({ policies, totalPages: Math.ceil(totalDocs / PAGE_SIZE) });
 };
 
 interface Iquery {

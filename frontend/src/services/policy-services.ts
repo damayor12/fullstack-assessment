@@ -7,7 +7,7 @@ interface FilterProps {
   joined: boolean;
 }
 
-export const fetchData = async (currentPage: number, filters: FilterProps) => {
+export const fetchData = async (currentPage: number, filters: FilterProps, value: string) => {
   
 
   // console.log('finalds filters', filters);
@@ -23,6 +23,7 @@ export const fetchData = async (currentPage: number, filters: FilterProps) => {
 
   }
 
+  if (value !== '') filterString += `&search=${value}`;
   // if (filters.joined) 
   // else if (filters.active && filters.pending)
   //   filterString += `&status=${'active'}&status=${'pending'}`;
