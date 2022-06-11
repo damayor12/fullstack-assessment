@@ -2,3 +2,84 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* .pagination > li {
+  margin: 0.3em;
+  padding: 0.3em;
+  list-style-type: none;
+  list-style: none;
+  float: left;
+  border: 1px solid purple;
+} */
+
+.pagination {
+  /* margin: 15px auto; */
+  margin: 0.3em;
+
+  display: flex;
+  list-style: none;
+  outline: none;
+}
+.pagination > .active > a {
+  background-color: purple;
+  border-color: purple;
+   /* border: 1px solid purple; */
+  color: #fff;
+}
+.pagination > li > a {
+  border: 1px solid purple;
+   /* border: 1px solid purple; */
+  padding: 15px 10px;
+  outline: none;
+  cursor: pointer;
+}
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  background-color: purple;
+  border-color: purple;
+   /* border: 1px solid purple; */
+  outline: none;
+}
+.pagination > li > a,
+.pagination > li > span {
+  color: purple;
+}
+.pagination > li:first-child > a,
+.pagination > li:first-child > span,
+.pagination > li:last-child > a,
+.pagination > li:last-child > span {
+  border-radius: unset;
+}
+
+
+/* .pagination > li:hover {
+  background-color: #47ccde;
+  cursor: pointer;
+} */
+/* .pagination > li:active {
+  background-color: green;
+} */
+
+/* .pagination li.pagination-disabled-button a,
+.pagination li.pagination-disabled-button a:hover {
+   background: gray;
+   border: 1px solid #808080;
+   color: black;
+   cursor: unset;
+} */
+
+/* .pagination > .active,
+/* .pagination > .active > li, */
+/* .pagination > .active > span, */
+/* .pagination > .active > a:hover, */
+/* .pagination > .active:hover, */
+/* .pagination > .active > a:focus, */
+/* .pagination > .active:focus {
+  background-color: #47ccde;
+  border-color: #47ccde;
+  outline: none;
+}  */
