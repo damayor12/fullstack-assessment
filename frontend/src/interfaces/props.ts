@@ -10,11 +10,12 @@ export interface Ipolicy {
     id: string;
     firstName: string;
     lastName: string;
-    dateOfBirth: string;
+    dateOfBirth: string | string;
   };
 }
 
 export interface Iresponse {
-  policies: Ipolicy[]
-  totalPages: number
+  policies: Ipolicy[];
+  totalPages: number;
+  totalCount: number;
 }

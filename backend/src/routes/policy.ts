@@ -1,10 +1,9 @@
-export {};
 const router = require('express').Router();
-const { fetchPolicies } = require('../controllers/policy-controllers');
+const { fetchPolicies, fetchFamily } = require('../controllers/policy-controllers');
 
-router.get('/policies', fetchPolicies);
+router.route('/policies').get(fetchPolicies);
 
-// router.get('/policies/families', fetchFamily);
+router.route('/policies/families/:id/:name').get(fetchFamily);
 
 
 module.exports = router

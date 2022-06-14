@@ -1,25 +1,13 @@
-import axios from 'axios';
-// import { FormProvider, useForm } from 'react-hook-form';
-import Navbar from './Navbar';
-import Header from './Header';
-import Table from './Table';
+import Navbar from './components/Navbar/Navbar';
+import Header from './components/Header/Header';
+import Table from './components/Table/Table';
 import React from 'react';
 import ReactPaginate from 'react-paginate';
-// import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 import './index.css';
 import { useEffect, useState } from 'react';
 import { Ipolicy } from './interfaces/props';
 import { fetchData } from './services/policy-services';
-
-// interface RouterProps {
-//   // type for `match.params`
-//   keyword: string; // must be type `string` since value comes from the URL
-// }
-
-interface TopicDetailProps {
-  // any other props (leave empty if none)
-}
 
 interface FilterProps {
   active: boolean;
@@ -27,9 +15,9 @@ interface FilterProps {
   joined: boolean;
 }
 
-const App: React.FC<TopicDetailProps> = (): JSX.Element => {
+const App: React.FC = (): JSX.Element => {
   const [data, setData] = useState<Ipolicy[] | []>([]);
-  const [pageNumber, setPageNumber] = useState<number>(1);
+  const [count, setCount] = useState<number | null>();
   const [pages, setTotalPages] = useState<number>(0);
   const [value, setValue] = useState('');
   const [filters, setFilters] = useState<FilterProps>({
@@ -37,29 +25,21 @@ const App: React.FC<TopicDetailProps> = (): JSX.Element => {
     pending: false,
     joined: false,
   });
-  // const [active, setActive] = useState(null);
+
   const [currentPage, setCurrentPage] = useState<number>(0);
 
-  useEffect((): void => {
-    fetchData(currentPage, filters, value).then(({ policies, totalPages }) => {
-      setData(policies);
-      setTotalPages(totalPages);
+  useEffect(() => {
+    fetchData(currentPage, filters, value).then(({ policies, totalPages, totalCount }) => {
+      if (policies) {
+        setData(policies);
+        setTotalPages(totalPages);
+        setCount(totalCount);
+      }
     });
-    // const fetchData = async () => {
-    //   const data = await axios.get('/policies');
-    //   setData(data)
-
-    //   return data;
-    // };
-
-    // fetchData();
-  }, [currentPage, filters,value]);
-
-  // console.log('final data', data);
+  }, [currentPage, filters, value]);
 
   const handleCurrentPage = (e: any) => {
     setCurrentPage(e.selected);
-    console.log('fired!!', e)
   };
 
   const handleCurrentFilter = (arg: string) => {
@@ -69,41 +49,35 @@ const App: React.FC<TopicDetailProps> = (): JSX.Element => {
         pending: false,
         joined: false,
       });
-      
       return;
     }
+
     setFilters((prev): FilterProps => {
       return { ...prev, [arg]: !filters[arg as keyof FilterProps] };
-      // if (arg === 'active') return { ...prev, active: !filters['active'] };
-      // else if (arg === 'pending') return { ...prev, pending: !filters['pending'] };
-      // else return { ...prev, joined: !filters['joined'] };
     });
     setCurrentPage(0);
-    // console.log('arrggg', arg, 'state', filters);
   };
 
   return (
     <div>
-      <Navbar value={value} setValue={setValue}/>
+      <Navbar value={value} setValue={setValue} />
       <div className="w-full p-8">
-        <Header
-          filters={filters}
-          setFilters={setFilters}
-          handleCurrentFilter={handleCurrentFilter}
-        />
+        <Header count={count} filters={filters} handleCurrentFilter={handleCurrentFilter} />
         <Table data={data} />
       </div>
 
       <div className="flex justify-center">
-        {data.length > 0 && <ReactPaginate
-          pageCount={pages}
-          previousLabel="previous"
-          nextLabel="next"
-          containerClassName="pagination"
-          onPageChange={handleCurrentPage}
-          // disabledClassName="pagination-disabled-button"
-          activeClassName={'active'}
-        />}
+        {data.length > 0 && (
+          <ReactPaginate
+            data-testid="pagination"
+            pageCount={pages}
+            previousLabel="previous"
+            nextLabel="next"
+            containerClassName="pagination"
+            onPageChange={handleCurrentPage}
+            activeClassName={'active'}
+          />
+        )}
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 //@ts-ignore
-import logo from './assets/logo.svg';
+import logo from '../../assets/logo.svg';
 
 interface NavbarProps {
   value?: string;
@@ -16,10 +16,11 @@ const Navbar: React.FC<NavbarProps> = ({ value, setValue }): JSX.Element => (
             <img className="h-6 w-auto sm:h-8" src={logo} alt="Feather logo" />
           </a>
 
-          {/* <input type="text" placeholder="cool" /> */}
+          
           <input
             type="search"
             value={value}
+            data-testid="search-input"
             onChange={(e) => setValue?.(e.target.value)}
             className="form-control blockw-200 px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out mx-5 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             id="exampleSearch"

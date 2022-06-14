@@ -7,10 +7,7 @@ interface FilterProps {
   joined: boolean;
 }
 
-export const fetchData = async (currentPage: number, filters: FilterProps, value: string) => {
-  
-
-  // console.log('finalds filters', filters);
+export const fetchData = async (currentPage?: number, filters?: FilterProps, value?: string) => {
   let filterString = '';
 
   for (let i in filters) {
@@ -20,27 +17,17 @@ export const fetchData = async (currentPage: number, filters: FilterProps, value
       else if (i === 'active') filterString += `&status=${'active'}`;
       else if (i === 'pending') filterString += `&status=${'pending'}`;
     }
-
   }
 
   if (value !== '') filterString += `&search=${value}`;
-  // if (filters.joined) 
-  // else if (filters.active && filters.pending)
-  //   filterString += `&status=${'active'}&status=${'pending'}`;
-  // else if (filters.active) filterString += `&status=${'active'}`;
-  // else if (filters.pending) filterString += `&status=${'pending'}`;
-
-  console.log('string',filterString)
 
   const { data } = await axios.get<Iresponse>(`/policies?page=${currentPage}${filterString}`);
-  // console.log('seeeeee', data);
 
   return data;
 };
 
-export const fetchFamilies = async (status: string) => {
-  const { data } = await axios.get<Iresponse>(`/policies/families?status=${status}`);
-  // console.log('seeeeee', data);
+export const fetchFamilies = async (id?: string, lastName?: string) => {
+  const { data } = await axios.get<Ipolicy[]>(`/policies/families/${id}/${lastName}`);
 
   return data;
 };

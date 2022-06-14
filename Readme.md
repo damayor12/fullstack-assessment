@@ -113,11 +113,26 @@ Feel free to update or add more endpoints to accommodate or improve your solutio
 ## General questions
 
 - How much time did you spend working on the solution?
+
+_a couple of days_
+
 - What’s the part of the solution you are most proud of?
+
+_i'm proud of the UI and the logic with the combined filtering, searching  and pagination._
 
   _You can share a code snippet here if you feel like it_
 
 - If you had more time, what other things you would like to do?
+
+_i would implement some more improved User Experience as well as performance optimizations at the backend_
+_i would also implement some routes for example for the search component._
+
 - Do you have any feedback regarding this coding challenge?  
 
-  _Is the initial setup working?, is something missing?, or any other comment_
+_Not exactly, but i particularly enjoyed working with Tailwindcss as well as Prisma._
+
+- Is the initial setup working?, is something missing?, or any other comment
+
+_To run the project, run `backend docker build` and `backend docker up` in the backend root_
+_then run `yarn start`  from the frontend folder. It should run on port 3001._
+
