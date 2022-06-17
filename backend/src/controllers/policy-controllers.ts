@@ -64,6 +64,8 @@ export const fetchPolicies = async (req: Request, res: Response) => {
         OR: [{ status: 'ACTIVE' }, { status: 'PENDING' }],
       };
 
+  if (search) page = 0
+
   let policies = await prisma.policy.findMany({
     skip: page * PAGE_SIZE,
     take: PAGE_SIZE,
